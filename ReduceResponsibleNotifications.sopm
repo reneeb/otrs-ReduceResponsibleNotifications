@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_package version="1.0">
+    <CVS>$Id: ReduceResponsibleNotifications.sopm,v 1.1.1.1 2011/04/15 07:49:58 rb Exp $</CVS>
+    <Name>ReduceResponsibleNotifications</Name>
+    <Version>3.3.1</Version>
+    <Framework>3.3.x</Framework>
+    <Vendor>Perl-Services.de</Vendor>
+    <URL>http://www.perl-services.de</URL>
+    <Description Lang="de">Reduziert die Anzahl an Benachrichtigungsmails, die ein Verantwortlicher erhält.</Description>
+    <Description Lang="en">Reduce the amount of notification mails a responsible person receives.</Description>
+    <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
+    <Filelist>
+        <File Permission="644" Location="Custom/Kernel/System/Ticket/ReduceResponsibleNotifications.pm" />
+        <File Permission="644" Location="Kernel/Config/Files/ReduceResponsibleNotifications.xml" />
+        <File Permission="644" Location="doc/ReduceResponsibleNotifications.json" />
+    </Filelist>
+</otrs_package>

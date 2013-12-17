@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<otrs_config version="1.0" init="Application">
+    <ConfigItem Name="Responsible::SuppressTypes" Required="0" Valid="1">
+        <Description Translatable="1">Types of Notifications that are suppressed for responsibles (given they are not the ticket owner).</Description>
+        <Group>ReduceResponsibleNotifications</Group>
+        <SubGroup>Core</SubGroup>
+        <Setting>
+            <Array>
+                <Item>AddNote</Item>
+            </Array>
+        </Setting>
+    </ConfigItem>
+    <ConfigItem Name="Ticket::CustomModule###999-ReduceResponsibleNotifications" Required="0" Valid="1">
+        <Description Translatable="1">Overloads (redefines) existing functions in Kernel::System::Ticket. Used to easily add customizations.</Description>
+        <Group>ReduceResponsibleNotifications</Group>
+        <SubGroup>Core::Ticket</SubGroup>
+        <Setting>
+            <String Regex="">Kernel::System::Ticket::ReduceResponsibleNotifications</String>
+        </Setting>
+    </ConfigItem>
+</otrs_config>
