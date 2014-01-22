@@ -14,6 +14,8 @@ use warnings;
 
 use List::Util qw(first);
 
+use Kernel::System::Ticket::Article;
+
 no warnings 'redefine';
 
 =head1 NAME
@@ -166,6 +168,35 @@ sub Kernel::System::Ticket::SendAgentNotification {
     );
 
     return 1;
+}
+
+sub Kernel::System::Ticket::ArticleCreate {
+    my ($Self, %Param) = @_;
+
+    my @SuppressTypes = @{ $Self->{ConfigObject}->Get( 'Responsible::MuteTypes' ) || [] };
+    if (
+        ( first { $Param{HistoryType} eq $_ }@SuppressTypes ) &&
+        $Self->{ConfigObject}->Get( 'Ticket::Responsible' )
+    ) {
+        my %Ticket = $Self->TicketGet(
+            TicketID      => $Param{TicketID},
+            DynamicFields => 0,
+        );
+
+        if ( $Param{ForceNotificationToUserID} && ref $Param{ForceNotificationToUserID} ne 'ARRAY' ) {
+            $Param{ForceNotificationToUserID} = [ $Param{ForceNotificationToUserID} ];
+        }
+
+        if ( $Param{ExcludeNotificationToUserID} && ref $Param{ExcludeNotificationToUserID} ne 'ARRAY' ) {
+            $Param{ExcludeNotificationToUserID} = [ $Param{ExcludeNotificationToUserID} ];
+        }
+
+        if ( !( first { $_ == $Ticket{ResponsibleID} }@{$Param{ForceNotificationToUserID} || []} ) ) {
+            push @{ $Param{ExcludeNotificationToUserID} }, $Ticket{ResponsibleID};
+        }
+    }
+
+    $Self->Kernel::System::Ticket::Article::ArticleCreate( %Param );
 }
 
 1;

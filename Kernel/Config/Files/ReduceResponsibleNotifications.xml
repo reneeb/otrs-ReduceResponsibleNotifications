@@ -6,6 +6,16 @@
         <SubGroup>Core</SubGroup>
         <Setting>
             <Array>
+                <Item>ResponsibleUpdate</Item>
+            </Array>
+        </Setting>
+    </ConfigItem>
+    <ConfigItem Name="Responsible::MuteTypes" Required="0" Valid="1">
+        <Description Translatable="1">Types of Notifications that are suppressed for responsibles (given they are not the ticket owner). Those types are only suppressed when the responsible wasn't explicitly added to the recipient list</Description>
+        <Group>ReduceResponsibleNotifications</Group>
+        <SubGroup>Core</SubGroup>
+        <Setting>
+            <Array>
                 <Item>AddNote</Item>
             </Array>
         </Setting>
